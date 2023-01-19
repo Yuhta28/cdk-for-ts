@@ -1,0 +1,23 @@
+{
+  "name": "cdk-for-ts",
+  "version": "1.0.0",
+  "description": "learn for CDK for TS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Yuhta28/cdk-for-ts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yuhta28/cdk-for-ts/issues"
+  },
+  "homepage": "https://github.com/Yuhta28/cdk-for-ts#readme",
+  "devDependencies": {
+    "aws-cdk": "^2.60.0",
+    "ts-node": "^10.9.1"
+  }
+}
