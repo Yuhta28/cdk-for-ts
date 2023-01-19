@@ -1,14 +1,24 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { BaseStackProps } from './base-stack-props';
+
+interface AwsCdkStackProps extends BaseStackProps {
+  ExistVPCId: string;
+}
 
 export class AwsCdkStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  readonly props: AwsCdkStackProps;
+
+  constructor(scope: Construct, id: string, props: AwsCdkStackProps) {
     super(scope, id, props);
+    this.props = props;
+    const {
+      ExistVPCId
+    } = props;
 
     const ExistVPC = ec2.Vpc.fromLookup(this, 'ExistVPC', {
-      vpcId: this.node.tryGetContext('ExistVPCId')
+      vpcId: ExistVPCId
     });
 
     const ami = new ec2.AmazonLinuxImage({
