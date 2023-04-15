@@ -35,7 +35,6 @@
     "@aws-cdk/core:enablePartitionLiterals": true,
     "@aws-cdk/aws-events:eventsTargetQueueSameAccount": true,
     "@aws-cdk/aws-iam:standardizedServicePrincipals": true,
-    "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker": true,
-    "ExistVPCId": "vpc-08c23a45f1be0d6d5"
+    "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker": true
   }
 }

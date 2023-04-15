@@ -2,9 +2,9 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { BaseStackProps } from './base-stack-props';
+import *  as rds from 'aws-cdk-lib/aws-rds';
 
 interface AwsCdkStackProps extends BaseStackProps {
-  ExistVPCId: string;
 }
 
 export class AwsCdkStack extends cdk.Stack {
@@ -14,22 +14,21 @@ export class AwsCdkStack extends cdk.Stack {
     super(scope, id, props);
     this.props = props;
     const {
-      ExistVPCId
     } = props;
 
-    const ExistVPC = ec2.Vpc.fromLookup(this, 'ExistVPC', {
-      vpcId: ExistVPCId
+    // new create vpc
+    const vpc = new ec2.Vpc(this, 'VPC', {
+      ipAddresses: ec2.IpAddresses.cidr('10.1.0.0/16'),
+      vpcName: "CDK-VPC",
+      natGateways: 1,
+      natGatewaySubnets: {
+        subnetType: ec2.SubnetType.PUBLIC
+      }
     });
 
     const ami = new ec2.AmazonLinuxImage({
       generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
       cpuType: ec2.AmazonLinuxCpuType.ARM_64
-    });
-
-    new ec2.Instance(this, 'EC2', {
-      vpc: ExistVPC,
-      instanceType: ec2.InstanceType.of(ec2.InstanceClass.T4G, ec2.InstanceSize.MICRO),
-      machineImage: ami
     });
   }
 }
